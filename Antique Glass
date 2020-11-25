@@ -1,4 +1,9 @@
+
+
 use antique_glass;
+
+-- First table
+
 create table vases(
 item_id int not null,
 item_description varchar(30),
@@ -37,6 +42,7 @@ values(3001, "Celery Vase", 1905, "Edwardian", "English", 22.5, 10.00, 53.00, "G
 
 
 -- Create Second Table
+
 create table sellers(
 seller_Id varchar(5),
 company_name varchar(30),
@@ -50,6 +56,7 @@ primary key (seller_Id)
 );
 
 -- Add data 
+
 insert into sellers(seller_Id, company_name, contact, address, postcode, city, telephone, email)
 values("TRMF9", "Ville Radieuse Antiques", "Jolyon White", "7 Abbey Lake", "PL6 7FG", "London", 01410627233, "ville@radieuse.com"),
 ("TR83S", "River & Weber", "Lorenzo Weber", "12 Wooton Rd", "KY2 9LB", "Dunfermline", 01383723542, "river@weber.com"),
@@ -58,14 +65,22 @@ values("TRMF9", "Ville Radieuse Antiques", "Jolyon White", "7 Abbey Lake", "PL6 
 ("TR3Q4", "Hogwarts Outlet", "Rafferty Fulton", "Fountain Row", "SE3 3TS", "Glasgow", 01404778724, "hogwarts@outlet.com")
 ;
 
+-- Change the name of the second table 
+
 ALTER TABLE `antique_glass`.`sellers` 
 RENAME TO  `antique_glass`.`traders` ;
+
+-- Selects two rows
 
 SELECT contact, email FROM traders
 ORDER BY contact;
 
+-- Selects item 3010
+
 SELECT * FROM antique_glass.vases
 WHERE item_id = 3010;
+
+-- Changes entry
 
 UPDATE antique_glass.vases
 SET item_condition = "repaired"
