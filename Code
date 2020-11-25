@@ -1,0 +1,74 @@
+use antique_glass;
+create table vases(
+item_id int not null,
+item_description varchar(30),
+date_of_manufacture varchar(20),
+era varchar(20),
+maker varchar(30),
+height float,
+diameter float,
+weight_in_g int,
+item_condition varchar(30),
+for_sale bool,
+seller varchar(30),
+primary key (item_id)
+);
+
+ALTER TABLE vases
+ADD estimated_price float;
+
+ALTER TABLE `antique_glass`.`vases` 
+CHANGE COLUMN `seller` `seller_id` VARCHAR(30) NULL DEFAULT NULL ;
+
+-- Add data
+insert into vases (item_id, item_description, date_of_manufacture, era, maker, 
+height, diameter, weight_in_g, item_condition, for_sale, seller_id, estimated_price)
+values(3001, "Celery Vase", 1905, "Edwardian", "English", 22.5, 10.00, 53.00, "Good", True, "TR3Q4", 155.00),
+(3002, "Glass an Metal Bowl", 1925, "Art Deco", "Louis Majorelle", 27.00, 27.00, 800.00, "Excellent", True, "TRMF9", 900.00),
+(3003, "Lily Vase", 1850, "Victorian", "English", 51.00, 18.00, 50.00, "Good", True, "TR6P4", 285.00),
+(3004, "Cameo Vase", 1900, "Art Nouveau", "French", 25.00, 5.00, 55.00, "Excellent", True, "TRET2", 265.00),
+(3005, "Green Vase", 1910, "Bohemian", "Steinschoenau", 19.00, 11.00, 57.30, "Good", True, "TRZ7B", 155.00),
+(3006, "Red Bulbous Vase", 1900, "Art Nouveau", "Emile Galle", 8.00, 15.00, 10.00, "Good", True, "TRET2", 885.00),
+(3007, "Latticino Glass Ewer", 1880, "Venecian", "Salviati", 30.00, 17.00, 76.00, "Good", True, "TR6P4", 450.00),
+(3008, "Bristol Blue Glass Vase", 1890, "Victorian", "English", 28.00, 12.80, 15.00, "Excellent", False, "TR56K", 750.00),
+(3009, "Japanese Enamel Vase", 1912, "Meiji Taisho", "Ando Jubei", 15.30, 15.30, 30.00, "Excellent", False, "TR83S", 950.00),
+(3010, "Cut Lead Crystal Vase", 1910, "Edwardian", "English", 21.00, 11.50, 20.00, "Chipped", True, "TR3Q4", 150.00)
+;
+
+
+-- Create Second Table
+create table sellers(
+seller_Id varchar(5),
+company_name varchar(30),
+contact varchar(30),
+address varchar(30),
+postcode varchar(10),
+city varchar(20),
+telephone int,
+email varchar(30),
+primary key (seller_Id)
+);
+
+-- Add data 
+insert into sellers(seller_Id, company_name, contact, address, postcode, city, telephone, email)
+values("TRMF9", "Ville Radieuse Antiques", "Jolyon White", "7 Abbey Lake", "PL6 7FG", "London", 01410627233, "ville@radieuse.com"),
+("TR83S", "River & Weber", "Lorenzo Weber", "12 Wooton Rd", "KY2 9LB", "Dunfermline", 01383723542, "river@weber.com"),
+("TR6P4", "Alice's Antiqueland", "Laila Morse", "52 Dunlop Hall", "CF6 2SB", "Hurworth Place", 01937701775, "alice@antiqueland.com"),
+("TR56K", "The Studio", "Raj Stamp", "4 Riverside Rd", "BH8 9AE", "Turton", 01282613354, "raj@studio.com"),
+("TR3Q4", "Hogwarts Outlet", "Rafferty Fulton", "Fountain Row", "SE3 3TS", "Glasgow", 01404778724, "hogwarts@outlet.com")
+;
+
+ALTER TABLE `antique_glass`.`sellers` 
+RENAME TO  `antique_glass`.`traders` ;
+
+SELECT contact, email FROM traders
+ORDER BY contact;
+
+SELECT * FROM antique_glass.vases
+WHERE item_id = 3010;
+
+UPDATE antique_glass.vases
+SET item_condition = "repaired"
+WHERE item_id = 3010;
+
+explain vases;
