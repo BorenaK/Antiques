@@ -86,4 +86,18 @@ UPDATE antique_glass.vases
 SET item_condition = "repaired"
 WHERE item_id = 3010;
 
+-- Inner Join
+
+SELECT * FROM vases
+INNER JOIN traders
+ON traders.seller_Id = vases.seller_Id;
+
+-- Selecting
+
+SELECT item_description, company_name FROM vases, traders
+WHERE traders.seller_Id = vases.seller_Id AND vases.era = "Victorian";
+
+SELECT * FROM vases
+WHERE estimated_price between 200 and 400;
+
 explain vases;
